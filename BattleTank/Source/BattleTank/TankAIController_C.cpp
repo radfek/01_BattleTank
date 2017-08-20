@@ -17,6 +17,16 @@ void ATankAIController_C::BeginPlay() {
 	}
 }
 
+void ATankAIController_C::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (GetPlayerTank()) 
+	{
+		AimTowardsPlayer();
+	}
+}
+
+
 ATank* ATankAIController_C::GetAIControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
@@ -27,8 +37,9 @@ ATank * ATankAIController_C::GetPlayerTank() const
 	return Cast<ATank> (GetWorld()->GetFirstPlayerController()->GetPawn());
 }
 
-/* instead of castint to ATank we can do this.. but i think that may be problems in the future
-APawn * ATankAIController_C::GetPlayerPawn() const
+void ATankAIController_C::AimTowardsPlayer()
 {
-	return GetWorld()->GetFirstPlayerController()->GetPawn();
-} */
+	FVector EnemyLocation = GetPlayerTank()->GetTargetLocation();
+	GetAIControlledTank()->AimAt(EnemyLocation);
+}
+
