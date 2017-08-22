@@ -11,6 +11,8 @@ ATank::ATank()
 
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 
+	
+
 }
 
 
@@ -36,9 +38,16 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void ATank::SetCannonReference(UStaticMeshComponent * CannonToSet)
+{
+	
+	TankAimingComponent->SetCannonReference(CannonToSet);
+
+}
+
 void ATank::AimAt(FVector HitLocation)
 {
-	TankAimingComponent->LogAimTarget(HitLocation);
+	TankAimingComponent->LogAimTarget(HitLocation, LaunchSpeed);
 	//auto OurTankName = GetName();
 	//UE_LOG(LogTemp, Warning, TEXT(" %s is aiming at : %s"), *OurTankName, (*HitLocation.ToString()))
 }

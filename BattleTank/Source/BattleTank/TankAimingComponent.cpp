@@ -1,6 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimingComponent.h"
+#include "Classes/Components/StaticMeshComponent.h"
+
+
+
 
 
 // Sets default values for this component's properties
@@ -32,9 +36,36 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	// ...
 }
 
-void UTankAimingComponent::LogAimTarget(FVector AimLocation)
+void UTankAimingComponent::LogAimTarget(FVector AimLocation, float LaunchSpeed)
 {
-	auto OurTankName = GetOwner()->GetName();
-	UE_LOG(LogTemp, Warning, TEXT(" %s is aiming at : %s"), *OurTankName, (*AimLocation.ToString()))
+	if (!Cannon) {return;}
+	FVector OutLaunchVelocity;
+	FVector StartLocation = Cannon->GetSocketLocation(FName("ProjectileLaunch"));
+
+	if (UGameplayStatics::SuggestProjectileVelocity(
+		this,
+		OutLaunchVelocity,
+		StartLocation,
+		AimLocation,
+		LaunchSpeed,
+		false,
+		0.0f,
+		10.0f,
+		ESuggestProjVelocityTraceOption::DoNotTrace
+		))
+	{
+		//Cauculate Out lauch velocity
+		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+
+		UE_LOG(LogTemp, Warning, TEXT("Firing at %s"), *AimDirection.ToString())
+	}
+
+	
+}
+
+void UTankAimingComponent::SetCannonReference(UStaticMeshComponent * CannonToSet)
+{
+
+	Cannon = CannonToSet;
 }
 

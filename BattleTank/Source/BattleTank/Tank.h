@@ -31,6 +31,11 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
+	UFUNCTION(BlueprintCallable ,Category = Setup)
+	void SetCannonReference(UStaticMeshComponent* CannonToSet);
+
+private:
+	UPROPERTY(EditAnywhere, Category = "Firing")
+		float LaunchSpeed = 5000;	   // TODO find sensible default
 	
 };

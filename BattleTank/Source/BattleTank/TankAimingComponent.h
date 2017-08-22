@@ -2,9 +2,16 @@
 
 #pragma once
 
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+
 #include "CoreMinimal.h"
+
+#include "Classes/Components/StaticMeshComponent.h"
+
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
+
+
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -24,6 +31,11 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void LogAimTarget(FVector AimLocation);
+	void LogAimTarget(FVector AimLocation, float LaunchSpeed);
+
+	void SetCannonReference(UStaticMeshComponent* CannonToSet);
+
+private:
+	UStaticMeshComponent* Cannon = nullptr;
 	
 };
