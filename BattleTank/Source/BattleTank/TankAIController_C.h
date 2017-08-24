@@ -3,7 +3,7 @@
 #pragma once
 
 
-#include "Tank.h"
+
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "TankAIController_C.generated.h"
@@ -11,6 +11,7 @@
 /**
  * 
  */
+class ATank; //Foward declaration
 UCLASS()
 class BATTLETANK_API ATankAIController_C : public AAIController
 {

@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAIController_C.h"
+#include "Tank.h"
+#include "Runtime/Engine/Classes/Engine/World.h"
 
 
 

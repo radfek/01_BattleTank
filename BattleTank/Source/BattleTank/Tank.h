@@ -3,9 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TankAimingComponent.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
+
+class UTankAimingComponent;		   //foward declaration  (instead of #include TankAimingComponent.h)
+class UTankCannon; //foward declaration  (instead of #include TankCannon.h)
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -25,14 +27,13 @@ protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintCallable ,Category = Setup)
-	void SetCannonReference(UStaticMeshComponent* CannonToSet);
+	void SetCannonReference(UTankCannon* CannonToSet);
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Firing")

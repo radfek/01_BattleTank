@@ -2,18 +2,15 @@
 
 #pragma once
 
-#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 
 #include "CoreMinimal.h"
-
-#include "Classes/Components/StaticMeshComponent.h"
 
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
+class UTankCannon; //foward declaration  (instead of #include TankCannon.h here we to it in .cpp - this makes stuff faster)
 
-
-
+// Holds cannon's properties and Elevate method
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
 {
@@ -24,18 +21,19 @@ public:
 	UTankAimingComponent();
 
 protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
+
 
 public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 
 	void LogAimTarget(FVector AimLocation, float LaunchSpeed);
 
-	void SetCannonReference(UStaticMeshComponent* CannonToSet);
+	void SetCannonReference(UTankCannon* CannonToSet);
+
+	//TODO Add SetTurretReference;;
+	void MoveCannon(FVector AimDirection);
 
 private:
-	UStaticMeshComponent* Cannon = nullptr;
+	UTankCannon* Cannon = nullptr;
 	
 };
