@@ -60,10 +60,10 @@ void UTankAimingComponent::MoveCannon(FVector AimDirection)
 
 	FRotator CannonRotator = Cannon->GetForwardVector().Rotation();
 	FRotator AimAsRotator = AimDirection.Rotation();
-	FRotator DeltaRotatoe = AimAsRotator - CannonRotator;
-	UE_LOG(LogTemp, Warning, TEXT("cannon rotator: %s Aim rotator: %s"), *CannonRotator.ToString(), *AimAsRotator.ToString())
+	FRotator DeltaRotator = AimAsRotator - CannonRotator;
+	//UE_LOG(LogTemp, Warning, TEXT("cannon rotator: %s Aim rotator: %s"), *DeltaRotator.ToString(), *AimAsRotator.ToString())
 	
-	Cannon->Elevate(1);
+	Cannon->Elevate(DeltaRotator.Pitch);	 	
 
 }
 
