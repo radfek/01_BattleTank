@@ -4,11 +4,12 @@
 
 
 #include "CoreMinimal.h"
-
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
 class UTankCannon; //foward declaration  (instead of #include TankCannon.h here we to it in .cpp - this makes stuff faster)
+class UTankTurret;
+
 
 // Holds cannon's properties and Elevate method
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -30,10 +31,14 @@ public:
 
 	void SetCannonReference(UTankCannon* CannonToSet);
 
+	void SetTurretReference(UTankTurret* TurretToSet);
+
 	//TODO Add SetTurretReference;;
-	void MoveCannon(FVector AimDirection);
+	void MoveTurretAndCannon(FVector AimDirection);
+
 
 private:
 	UTankCannon* Cannon = nullptr;
 	
+	UTankTurret* Turret = nullptr;
 };

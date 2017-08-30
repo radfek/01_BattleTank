@@ -8,7 +8,7 @@
 
 class UTankAimingComponent;		   //foward declaration  (instead of #include TankAimingComponent.h)
 class UTankCannon; //foward declaration  (instead of #include TankCannon.h)
-
+class UTankTurret;
 UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
@@ -34,6 +34,10 @@ public:
 
 	UFUNCTION(BlueprintCallable ,Category = Setup)
 	void SetCannonReference(UTankCannon* CannonToSet);
+	
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretReference(UTankTurret* TurretToSet);
+
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Firing")

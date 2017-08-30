@@ -3,6 +3,7 @@
 #include "TankAimingComponent.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "TankCannon.h"
+#include "TankTurret.h"
 #include "Classes/Components/StaticMeshComponent.h"
 
 // Sets default values for this component's properties
@@ -38,15 +39,15 @@ void UTankAimingComponent::LogAimTarget(FVector AimLocation, float LaunchSpeed)
 
 		//Cauculate Out lauch velocity
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
-		MoveCannon (AimDirection);	
+		MoveTurretAndCannon (AimDirection);	
+		
 		float Time = GetWorld()->GetTimeSeconds();
 		UE_LOG(LogTemp, Warning, TEXT("Time:%f  Aim Solution found"), Time)
 	}
 	else {
 		float Time = GetWorld()->GetTimeSeconds();
 		UE_LOG(LogTemp, Error, TEXT("Time:%f  NotFound"), Time)
-
-		//log stuff to know 
+		
 	}
 }
 
@@ -55,7 +56,12 @@ void UTankAimingComponent::SetCannonReference(UTankCannon * CannonToSet)  //Call
 	Cannon = CannonToSet;
 }
 
-void UTankAimingComponent::MoveCannon(FVector AimDirection)
+void UTankAimingComponent::SetTurretReference(UTankTurret * TurretToSet)  //Called by a blueprint->TAnk_BP
+{
+	Turret = TurretToSet;
+}
+
+void UTankAimingComponent::MoveTurretAndCannon(FVector AimDirection)
 {
 
 	FRotator CannonRotator = Cannon->GetForwardVector().Rotation();
@@ -63,7 +69,9 @@ void UTankAimingComponent::MoveCannon(FVector AimDirection)
 	FRotator DeltaRotator = AimAsRotator - CannonRotator;
 	//UE_LOG(LogTemp, Warning, TEXT("cannon rotator: %s Aim rotator: %s"), *DeltaRotator.ToString(), *AimAsRotator.ToString())
 	
-	Cannon->Elevate(DeltaRotator.Pitch);	 	
-
+	Cannon->Elevate(DeltaRotator.Pitch);	
+	Turret->Rotate(DeltaRotator.Yaw);
+	
 }
+
 

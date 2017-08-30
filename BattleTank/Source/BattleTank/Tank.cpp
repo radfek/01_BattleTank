@@ -3,6 +3,7 @@
 #include "Tank.h"
 #include "TankAimingComponent.h"
 #include "TankCannon.h"
+#include "TankTurret.h"
 #include "Runtime/CoreUObject/Public/UObject/UObjectGlobals.h"
 
 // Sets default values
@@ -35,13 +36,19 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ATank::SetCannonReference(UTankCannon * CannonToSet)
 {
-	
 	TankAimingComponent->SetCannonReference(CannonToSet);	
-
 }
+
+void ATank::SetTurretReference(UTankTurret * TurretToSet)
+{
+	TankAimingComponent->SetTurretReference(TurretToSet);
+}
+
+
 
 void ATank::AimAt(FVector HitLocation)
 {
+	
 	TankAimingComponent->LogAimTarget(HitLocation, LaunchSpeed);
 	//auto OurTankName = GetName();
 	//UE_LOG(LogTemp, Warning, TEXT(" %s is aiming at : %s"), *OurTankName, (*HitLocation.ToString()))
