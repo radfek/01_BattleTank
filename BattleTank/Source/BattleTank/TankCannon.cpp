@@ -13,7 +13,7 @@ void UTankCannon::Elevate(float RelativeSpeed) {
 	float ElevationChange = RelativeSpeed * MaxDegreesPerSecond * GetWorld()->DeltaTimeSeconds;		  //Relative speed between -1 +1/ elevationchange = relative speed ()* velocity(speed/seconds) * time(s)
 	float RawNewElevation = (RelativeRotation.Pitch + ElevationChange);
 	float Elevation = FMath::Clamp(RawNewElevation, MinElevation, MaxElevation);
-	UE_LOG(LogTemp, Error, TEXT(" %f "), Elevation)
+	//UE_LOG(LogTemp, Error, TEXT(" %f "), Elevation)
 	SetRelativeRotation(FRotator(Elevation,0,0));
 	
 																   

@@ -4,6 +4,7 @@
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "TankCannon.h"
 #include "TankTurret.h"
+#include "Runtime/Engine/Classes/Engine/World.h"
 #include "Classes/Components/StaticMeshComponent.h"
 
 // Sets default values for this component's properties
@@ -11,7 +12,7 @@ UTankAimingComponent::UTankAimingComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;				     //TODO Should this realy tick?
+	PrimaryComponentTick.bCanEverTick = false;				   
 
 
 	// ...
@@ -40,14 +41,6 @@ void UTankAimingComponent::LogAimTarget(FVector AimLocation, float LaunchSpeed)
 		//Cauculate Out lauch velocity
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveTurretAndCannon (AimDirection);	
-		
-		float Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("Time:%f  Aim Solution found"), Time)
-	}
-	else {
-		float Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Error, TEXT("Time:%f  NotFound"), Time)
-		
 	}
 }
 

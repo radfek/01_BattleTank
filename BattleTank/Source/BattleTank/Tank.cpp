@@ -27,8 +27,8 @@ void ATank::BeginPlay()
 
 
 
-// Called to bind functionality to input
-void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+// Called to bind functionality to input	   
+void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)   //TODO nao sei o que isso significa mais
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
@@ -42,6 +42,12 @@ void ATank::SetCannonReference(UTankCannon * CannonToSet)
 void ATank::SetTurretReference(UTankTurret * TurretToSet)
 {
 	TankAimingComponent->SetTurretReference(TurretToSet);
+}
+
+void ATank::FireProjectile()
+{
+
+	UE_LOG(LogTemp, Warning, TEXT("Fire in the Hole"))
 }
 
 

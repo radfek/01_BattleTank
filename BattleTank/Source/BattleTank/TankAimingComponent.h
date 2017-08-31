@@ -26,14 +26,12 @@ protected:
 
 public:	
 
-
 	void LogAimTarget(FVector AimLocation, float LaunchSpeed);
 
 	void SetCannonReference(UTankCannon* CannonToSet);
 
 	void SetTurretReference(UTankTurret* TurretToSet);
 
-	//TODO Add SetTurretReference;;
 	void MoveTurretAndCannon(FVector AimDirection);
 
 
