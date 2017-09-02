@@ -7,8 +7,11 @@
 #include "Tank.generated.h"
 
 class UTankAimingComponent;		   //foward declaration  (instead of #include TankAimingComponent.h)
+
 class UTankCannon; //foward declaration  (instead of #include TankCannon.h)
 class UTankTurret;
+class AProjectile;
+
 UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
@@ -19,6 +22,8 @@ protected:
 	virtual void BeginPlay() override;
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
+
+
 
 public:	
 
@@ -39,7 +44,15 @@ public:
 	void FireProjectile();
 
 private:
-	UPROPERTY(EditAnywhere, Category = "Firing")
-		float LaunchSpeed = 5000;
-	
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float LaunchSpeed = 5000;
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint; 
+
+	//Local cannon reference to spawn projectile
+	UTankCannon* Cannon = nullptr;
+
+	float ReloadTimeInSeconds = 3;
+	float LastFireTime = -4;
 };
