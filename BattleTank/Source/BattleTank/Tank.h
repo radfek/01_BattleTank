@@ -44,15 +44,18 @@ public:
 	void FireProjectile();
 
 private:
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 5000;
 
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeInSeconds = 3;
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint; 
 
 	//Local cannon reference to spawn projectile
 	UTankCannon* Cannon = nullptr;
 
-	float ReloadTimeInSeconds = 3;
-	float LastFireTime = -4;
+	
+	float LastFireTime = -4;   //initializa this as nagetive to start game with cannon reloaded
 };
